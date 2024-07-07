@@ -1,9 +1,11 @@
 const User = require("../modal/user.modal.js")
 const bcryptjs=require("bcryptjs")
-module.exports.signup = async (req, res) => {
+const {errorHandler}=require("../utils/error.js")
+module.exports.signup = async (req, res,next) => {
    const { username, email, password } = req.body;
    if (!username || !email || !password || username === "" || email === "" || password === "") {
-      return res.status(400).json({ message: "All fields are required" })
+      // return res.status(400).json({ message: "All fields are required" })
+      return next(errorHandler(400,"All field are required"))
    }
    const hashedPassword=bcryptjs.hashSync(password,10)
    const newUser = new User({
@@ -16,6 +18,6 @@ module.exports.signup = async (req, res) => {
       res.json("Signup is succesful")
    }
    catch(err){
-      res.status(500).json({message:err.message})
+      next(err)
    }
 }
