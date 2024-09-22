@@ -25,6 +25,7 @@ export default function Header() {
                 <AiOutlineSearch/>
             </Button>
             <div className='flex gap-2 md:order-2'>
+            
                 <Button className='w-12 h-10 hidden sm:inline' color="gray" pill>
                     <FaMoon/>
                 </Button>
@@ -34,9 +35,11 @@ export default function Header() {
                     </Button>
                 </Link>
                 <Navbar.Toggle/>
+                
             </div>
                 <Navbar.Collapse>
-                    <Navbar.Link active={path==="/"} as={"div"}>
+                {/* //as we are using two link so it causes error to avoid that we consider this as div */}
+                    <Navbar.Link active={path==="/"} as={"div"}> 
                         <Link to='/'>
                         Home
                         </Link>

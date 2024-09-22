@@ -6,6 +6,7 @@ module.exports.signup = async (req, res,next) => {
    if (!username || !email || !password || username === "" || email === "" || password === "") {
       // return res.status(400).json({ message: "All fields are required" })
       return next(errorHandler(400,"All field are required"))
+      // errorhandler is a function used to create error message and status code
    }
    const hashedPassword=bcryptjs.hashSync(password,10)
    const newUser = new User({

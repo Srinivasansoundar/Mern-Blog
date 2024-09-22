@@ -14,6 +14,7 @@ mongoose
     console.log(err);
   });
 app.use(express.json())
+// to parse json into req.body
 
 app.listen(3000, () => {
     console.log("SERVER IS RUNNING ON PORT 3000")
