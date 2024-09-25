@@ -7,6 +7,7 @@ import Projects from "./pages/Projects"
 import Home from "./pages/Home"
 import FooterCom from "./Components/Footer"
 import Header from "./Components/Header"
+import PrivateRoute from "./Components/PrivateRoute"
 // import { Footer } from "flowbite-react"
 export default function App() {
   return (
@@ -17,7 +18,9 @@ export default function App() {
       <Route path="/about" element ={<About/>}/>  
       <Route path="/sign-in" element ={<SignIn/>}/>
       <Route path="/sign-up" element ={<SignUp/>}/>
-      <Route path="/dashboard" element ={<Dashboard/>}/>      
+      <Route element={<PrivateRoute/>}>
+         <Route path="/dashboard" element ={<Dashboard/>}/>  
+      </Route>
       <Route path="/projects" element ={<Projects/>}/>  
     </Routes>
     <FooterCom/>
