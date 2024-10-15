@@ -5,6 +5,7 @@ const dotenv=require("dotenv");
 const userRoutes=require("./routes/user.routes.js")
 const authRoutes=require("./routes/auth.routes.js")
 dotenv.config();
+
 mongoose
   .connect(process.env.MONGO)
   .then(() => {
