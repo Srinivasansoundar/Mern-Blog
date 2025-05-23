@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv=require("dotenv");
 const userRoutes=require("./routes/user.routes.js")
 const authRoutes=require("./routes/auth.routes.js")
+const cookieParser=require("cookie-parser")
 dotenv.config();
 
 mongoose
@@ -16,9 +17,13 @@ mongoose
   });
 app.use(express.json())
 // to parse json into req.body
-
+app.use(cookieParser())
+// use cookieParser() not cookieParser 
 app.listen(3000, () => {
     console.log("SERVER IS RUNNING ON PORT 3000")
+})
+app.get("/test",(req,res)=>{
+  res.json({message:"hello"})
 })
 app.use("/api/user",userRoutes)
 app.use("/api/auth",authRoutes)

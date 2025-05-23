@@ -46,7 +46,7 @@ export default function Header() {
                    <Link to='/dashboard?tab=profile'>
                      <Dropdown.Item>Profile</Dropdown.Item>
                    </Link>
-                   <Dropdown.Divider/>
+                
                    <Dropdown.Item>Sign out</Dropdown.Item>
                   </Dropdown>
            
