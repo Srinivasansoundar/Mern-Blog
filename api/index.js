@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const dotenv=require("dotenv");
 const userRoutes=require("./routes/user.routes.js")
 const authRoutes=require("./routes/auth.routes.js")
+const postRoutes=require('./routes/post.routes.js')
 const cookieParser=require("cookie-parser")
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.get("/test",(req,res)=>{
 })
 app.use("/api/user",userRoutes)
 app.use("/api/auth",authRoutes)
+app.use("/api/post",postRoutes)
 app.use((err,req,res,next)=>{
   const statusCode=err.statusCode || 500;
   const message=err.message || "Internal Server Error";
