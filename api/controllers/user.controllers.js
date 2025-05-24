@@ -1,7 +1,10 @@
+const User = require("../modal/user.modal");
+const {errorHandler}=require("../utils/error")
+const bcryptjs=require("bcryptjs")
 module.exports.test=(req,res)=>{
     res.json({message:"API is working"})
 }
-module.exports.updateUser=async(req,rest,next)=>{
+module.exports.updateUser=async(req,res,next)=>{
     if (req.user.id !== req.params.userId) {
         return next(errorHandler(403, 'You are not allowed to update this user'));
       }
@@ -29,4 +32,39 @@ module.exports.updateUser=async(req,rest,next)=>{
           );
         }
     }
+    try{
+      const updateUser=await User.findByIdAndUpdate(req.params.userId,{
+        $set:{
+          username:req.body.username,
+          email:req.body.email,
+          profilePicture:req.body.profilePicture,
+          password:req.body.password,
+        }
+      },{new:true});
+      const{password,...rest}=updateUser._doc;
+      res.status(200).json(rest);
+    }
+    catch(err){
+      next(err);
+    }
+}
+module.exports.deleteUser=async(req,res,next)=>{
+  if(req.params.userId!==req.user.id){
+    return next(errorHandler(403, 'You are not allowed to delete this user'));
+  }
+  try{
+    await User.findByIdAndDelete(req.user.id);
+    res.status(200).json("User is deleted sucessfully");
+  }
+  catch(err){
+    next(err)
+  }
+}
+module.exports.signout=(req,res,next)=>{
+  try{
+    res.clearCookie('access_token').status(200).json('User has been signed out');
+  }
+  catch(err){
+    next(err);
+  }
 }
