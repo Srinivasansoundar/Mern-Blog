@@ -1,5 +1,6 @@
 const Post=require('../modal/post.model.js')
 const {errorHandler}=require('../utils/error.js')
+// from the token i get req.user.isAdmin and req.user.id
 module.exports.create = async (req, res, next) => {
   if (!req.user.isAdmin) {
     return next(errorHandler(403, 'You are not allowed to create a post'));
