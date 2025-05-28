@@ -49,15 +49,14 @@ module.exports.updateUser=async(req,res,next)=>{
     }
 }
 module.exports.deleteUser=async(req,res,next)=>{
-  if(req.params.userId!==req.user.id){
+  if (!req.user.isAdmin && req.user.id !== req.params.userId) {
     return next(errorHandler(403, 'You are not allowed to delete this user'));
   }
-  try{
-    await User.findByIdAndDelete(req.user.id);
-    res.status(200).json("User is deleted sucessfully");
-  }
-  catch(err){
-    next(err)
+  try {
+    await User.findByIdAndDelete(req.params.userId);
+    res.status(200).json('User has been deleted');
+  } catch (error) {
+    next(error);
   }
 }
 module.exports.signout=(req,res,next)=>{
