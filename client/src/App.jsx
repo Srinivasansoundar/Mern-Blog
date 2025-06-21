@@ -12,10 +12,12 @@ import Adminprivate from "./Components/Adminprivate"
 import CreatePost from "./pages/CreatePost"
 import UpdatePost from "./pages/UpdatePost"
 import PostPage from "./pages/PostPage"
+import ScrollToTop from "./Components/ScrollToTop"
 // import { Footer } from "flowbite-react"
 export default function App() {
   return (
     <BrowserRouter>
+    <ScrollToTop/>
     <Header/>
     <Routes>
       <Route path="/" element ={<Home/>}/>  
